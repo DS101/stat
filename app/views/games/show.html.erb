@@ -1,0 +1,58 @@
+<h1> <%= @game.title %> </h1>
+<h4> <%= Team.find(@game.home_team_id).title %> </h4>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+     <td>Игрок</td>
+     <td>Гол</td>
+     <td>голевая передача</td>
+     <td>Процент передач</td>
+     <td>Время на поле</td>
+     <td>удары(в створ)</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @home_team_players.each do |player| %>
+      <% player_statistic = player.statistics.find_by(game_id: @game.id) %>
+      <tr> 
+        <td> <%= player.name %> </td>
+        <td> <%= player_statistic.goal %> </td>
+        <td> <%= player_statistic.assist %> </td>
+        <td> <%= "#{player_statistic.pass} %" %> </td>
+        <td> <%= player_statistic.game_time %> </td>
+        <td> <%= "#{player_statistic.shot}(#{player_statistic.on_target})" %> </td>
+      </tr>  
+    <% end %>
+    
+  </tbody>
+     
+</table>
+
+<h4> <%= Team.find(@game.away_team_id).title %> </h4>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+     <td>Игрок</td>
+     <td>Гол</td>
+     <td>голевая передача</td>
+     <td>Процент передач</td>
+     <td>Время на поле</td>
+     <td>удары(в створ)</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @away_team_players.each do |player| %>
+      <% player_statistic = player.statistics.find_by(game_id: @game.id) %>
+      <tr> 
+        <td> <%= player.name %> </td>
+        <td> <%= player_statistic.goal %> </td>
+        <td> <%= player_statistic.assist %> </td>
+        <td> <%= "#{player_statistic.pass} %" %> </td>
+        <td> <%= player_statistic.game_time %> </td>
+        <td> <%= "#{player_statistic.shot}(#{player_statistic.on_target})" %> </td>
+      </tr>  
+    <% end %>
+    
+  </tbody>
+     
+</table>
